@@ -4,9 +4,9 @@
 //
 //  Created by Jimena Hernández García on 12/03/26.
 //
-
 import Foundation
 import CoreData
+
 
 // MARK: - CoreDataManager
 
@@ -55,7 +55,7 @@ final class CoreDataManager {
     
     /// Agrega un personaje a favoritos
     /// - Parameter character: personaje a guardar
-    func addFavorite(character: RickandMortyApp.Character) {
+
         guard !isFavorite(id: character.id) else { return }
         
         let favorite = FavoriteCharacter(context: context)
@@ -90,4 +90,4 @@ final class CoreDataManager {
     
     // MARK: - Fetch Favorites
     
-    /// Obtiene todos los personajes guardados como
+
