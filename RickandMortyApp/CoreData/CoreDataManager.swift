@@ -21,12 +21,14 @@ final class CoreDataManager {
     
     /// Contenedor principal de Core Data
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "RickAndMorty")
-        container.loadPersistentStores { _, error in
+        let container = NSPersistentContainer(name: "RickandMorty")
+        container.loadPersistentStores { description, error in
             if let error {
-                fatalError("Error al cargar Core Data: \(error)")
+                fatalError("Error al cargar Core Data: \(error.localizedDescription)")
             }
+            print("Core Data cargado: \(description.url?.absoluteString ?? "")")
         }
+        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
     
