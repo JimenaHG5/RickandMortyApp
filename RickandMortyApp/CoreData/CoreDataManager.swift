@@ -7,6 +7,7 @@
 import Foundation
 import CoreData
 
+
 // MARK: - CoreDataManager
 
 /// Clase responsable de todas las operaciones de persistencia con Core Data
@@ -54,8 +55,7 @@ final class CoreDataManager {
     
     /// Agrega un personaje a favoritos
     /// - Parameter character: personaje a guardar
-    func addFavorite(character: Character) {
-        // verificar que no exista ya en favoritos
+
         guard !isFavorite(id: character.id) else { return }
         
         let favorite = FavoriteCharacter(context: context)
@@ -90,35 +90,4 @@ final class CoreDataManager {
     
     // MARK: - Fetch Favorites
     
-    /// Obtiene todos los personajes guardados como favoritos
-    /// - Returns: lista de FavoriteCharacter guardados localmente
-    func fetchFavorites() -> [FavoriteCharacter] {
-        let request = FavoriteCharacter.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        
-        do {
-            return try context.fetch(request)
-        } catch {
-            print("Error al obtener favoritos: \(error)")
-            return []
-        }
-    }
-    
-    // MARK: - Is Favorite
-    
-    /// Verifica si un personaje ya está guardado en favoritos
-    /// - Parameter id: identificador del personaje
-    /// - Returns: true si es favorito, false si no
-    func isFavorite(id: Int) -> Bool {
-        let request = FavoriteCharacter.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %d", id)
-        
-        do {
-            let count = try context.count(for: request)
-            return count > 0
-        } catch {
-            print("Error al verificar favorito: \(error)")
-            return false
-        }
-    }
-}
+
