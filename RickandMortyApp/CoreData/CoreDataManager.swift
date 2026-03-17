@@ -1,12 +1,5 @@
-//
-//  Core.swift
-//  CharactersRickandMorty2
-//
-//  Created by Jimena Hernández García on 12/03/26.
-//
 import Foundation
 import CoreData
-
 
 // MARK: - CoreDataManager
 
@@ -26,7 +19,7 @@ final class CoreDataManager {
             if let error {
                 fatalError("Error al cargar Core Data: \(error.localizedDescription)")
             }
-            print("Core Data cargado: \(description.url?.absoluteString ?? "")")
+            print("✅ Core Data cargado: \(description.url?.absoluteString ?? "")")
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
         return container
@@ -56,8 +49,7 @@ final class CoreDataManager {
     // MARK: - Add Favorite
     
     /// Agrega un personaje a favoritos
-    /// - Parameter character: personaje a guardar
-
+    func addFavorite(character: Character) {
         guard !isFavorite(id: character.id) else { return }
         
         let favorite = FavoriteCharacter(context: context)
@@ -76,7 +68,6 @@ final class CoreDataManager {
     // MARK: - Remove Favorite
     
     /// Elimina un personaje de favoritos
-    /// - Parameter id: identificador del personaje a eliminar
     func removeFavorite(id: Int) {
         let request = FavoriteCharacter.fetchRequest()
         request.predicate = NSPredicate(format: "id == %d", id)
@@ -92,4 +83,32 @@ final class CoreDataManager {
     
     // MARK: - Fetch Favorites
     
-
+    /// Obtiene todos los personajes guardados como favoritos
+    func fetchFavorites() -> [FavoriteCharacter] {
+        let request = FavoriteCharacter.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
+        do {
+            return try context.fetch(request)
+        } catch {
+            print("Error al obtener favoritos: \(error)")
+            return []
+        }
+    }
+    
+    // MARK: - Is Favorite
+    
+    /// Verifica si un personaje ya está guardado en favoritos
+    func isFavorite(id: Int) -> Bool {
+        let request = FavoriteCharacter.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %d", id)
+        
+        do {
+            let count = try context.count(for: request)
+            return count > 0
+        } catch {
+            print("Error al verificar favorito: \(error)")
+            return false
+        }
+    }
+}
