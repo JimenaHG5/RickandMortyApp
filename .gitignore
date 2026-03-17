@@ -1,1 +1,9 @@
-*.xcuserdata/
+
+*.xcuserstate
+DerivedData/
+.build/
+**/xcuserdata/
+xcuserdata/
+
+# macOS
+.DS_Store

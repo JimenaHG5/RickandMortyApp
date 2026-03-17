@@ -14,7 +14,6 @@ final class FavoritesViewController: UIViewController {
         tableView.backgroundColor = UIColor(named: "RMBackground") ?? .black
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
-        tableView.contentInsetAdjustmentBehavior = .never
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 140
         return tableView
@@ -75,13 +74,7 @@ final class FavoritesViewController: UIViewController {
     
     private func setupLayout() {
         view.addSubview(tableView)
-        
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
+        tableView.pinToSuperview()
     }
     
     private func setupBindings() {
