@@ -86,7 +86,8 @@ final class CharactersViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(CharacterCell.self, forCellReuseIdentifier: CharacterCell.identifier)
-        
+        tableView.cellLayoutMarginsFollowReadableWidth = false
+
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
@@ -106,14 +107,12 @@ final class CharactersViewController: UIViewController {
     private func updateTableHeaderLayout() {
         let width = tableView.bounds.width
         guard width > 0 else { return }
-        
+
         let headerHeight: CGFloat = 60
         headerContainer.frame = CGRect(x: 0, y: 0, width: width, height: headerHeight)
         searchBar.frame = CGRect(x: 16, y: 8, width: width - 32, height: 44)
-        
+
         if tableView.tableHeaderView !== headerContainer {
-            tableView.tableHeaderView = headerContainer
-        } else {
             tableView.tableHeaderView = headerContainer
         }
     }

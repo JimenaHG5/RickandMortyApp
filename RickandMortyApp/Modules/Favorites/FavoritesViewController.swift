@@ -66,7 +66,8 @@ final class FavoritesViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(CharacterCell.self, forCellReuseIdentifier: CharacterCell.identifier)
-        
+        tableView.cellLayoutMarginsFollowReadableWidth = false
+
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
