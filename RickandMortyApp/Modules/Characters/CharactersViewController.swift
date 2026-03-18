@@ -92,9 +92,17 @@ final class CharactersViewController: UIViewController {
         }
     }
     
+    
     private func setupLayout() {
         view.addSubview(tableView)
-        tableView.pinToSuperview()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
     private func setupTableHeader() {
         headerContainer.backgroundColor = UIColor(named: "RMBackground") ?? .black
@@ -225,5 +233,14 @@ extension CharactersViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        print("VIEW FRAME:", view.frame)
+        print("WINDOW FRAME:", String(describing: view.window?.frame))
+        print("SCREEN BOUNDS:", UIScreen.main.bounds)
+        print("SCENE SCREEN:", String(describing: view.window?.windowScene?.screen.bounds))
+    }
 }
+
 
