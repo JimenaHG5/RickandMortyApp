@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -15,8 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.overrideUserInterfaceStyle = .dark
         window.backgroundColor = .black
-        window.rootViewController = RMTabBarController()
         window.makeKeyAndVisible()
+        window.rootViewController = UIHostingController(rootView: LoginView())
         
         self.window = window
     }
@@ -29,3 +30,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         CoreDataManager.shared.saveContext()
     }
 }
+
