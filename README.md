@@ -1,10 +1,17 @@
 # Rick and Morty App 🛸
 
 Aplicación iOS que consume la [Rick and Morty API](https://rickandmortyapi.com/) para mostrar personajes, permitir búsquedas y guardar favoritos localmente.
+## Credenciales demo
+
+| Campo | Valor |
+|-------|-------|
+| Email | rick@sanchez.com |
+| Contraseña | pruebajim |
 
 ## Funcionalidades
 
 ### Requerimientos cumplidos ✅
+-Login 
 -  Listado de personajes con `UITableView` y celdas reutilizables
 - Paginación automática al llegar al final de la lista
 - Búsqueda de personajes por nombre usando el endpoint de la API
